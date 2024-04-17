@@ -7,10 +7,15 @@ function Landing() {
   const [comments, setComments] = useState([]);
 
   const fetchComments = async (url) => {
-    const response = await fetch(`https://api.pullpush.io/reddit/search/comment/?link_id=${postId}`);
-
-    const data = await response.json();
-    setComments(data);
+    const match = url.match(/comments\/(\w+)\//);
+    if (match) {
+      const postId = match[1];
+      const response = await fetch(`https://api.pullpush.io/reddit/search/comment/?link_id=${postId}`);
+      const data = await response.json();
+      setComments(data.data);
+    } else {
+      alert('Invalid Reddit URL');
+    }
   };
 
   return (
