@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import SearchBar from '../SearchBar/SearchBar';
 import CommentsList from '../Comments/CommentsList';
+import PropTypes from 'prop-types';
 
 function Landing() {
   const [comments, setComments] = useState([]);
@@ -20,3 +21,10 @@ function Landing() {
     </div>
   );
 }
+
+Landing.propTypes = {
+  postId: PropTypes.string.isRequired,
+  url: PropTypes.string.isRequired,
+};
+
+export default Landing;

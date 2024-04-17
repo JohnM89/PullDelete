@@ -1,4 +1,4 @@
-import React from 'react';
+import PropTypes from 'prop-types';
 
 function CommentsList({ comments }) {
   return (
@@ -11,5 +11,10 @@ function CommentsList({ comments }) {
     </ul>
   );
 }
+
+//prop types for comments and map
+
+
+
 
 export default CommentsList;

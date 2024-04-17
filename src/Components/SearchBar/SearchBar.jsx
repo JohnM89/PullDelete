@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import PropTypes from 'prop-types';
 
 function SearchBar({ onSubmit }) {
   const [url, setUrl] = useState('');
@@ -20,4 +21,10 @@ function SearchBar({ onSubmit }) {
   );
 }
 
+//props for onSubmit
+
+SearchBar.propTypes = {
+    onSubmit: PropTypes.func.isRequired,
+    };
+    
 export default SearchBar;
