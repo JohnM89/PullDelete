@@ -20,7 +20,7 @@ function Landing() {
 
   return (
     <div>
-      <h1>Reddit Comment Fetcher</h1>
+      <h1>Paste URL here</h1>
       <SearchBar onSubmit={fetchComments} />
       <CommentsList comments={comments} />
     </div>

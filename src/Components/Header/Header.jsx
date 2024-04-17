@@ -3,7 +3,7 @@
 const Header = () => {
     return (
         <header>
-            <h1>My Header</h1>
+            <h1>Comment Fetcher</h1>
 
         </header>
     );
