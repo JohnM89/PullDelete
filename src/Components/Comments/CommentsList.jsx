@@ -1,60 +1,71 @@
 import  { useState } from 'react';  // Import useState and other React features
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-// import { GroupBox, TreeView, Button, Window, WindowContent, WindowHeader } from 'react95';
 
-// const Wrapper = styled.div`
-//   padding: 5rem;
-//   .window-title {
-//     display: flex;
-//     align-items: center;
-//     justify-content: space-between;
-//   }
-//   .close-icon {
-//     display: inline-block;
-//     width: 16px;
-//     height: 16px;
-//     margin-left: -1px;
-//     margin-top: -1px;
-//     transform: rotateZ(45deg);
-//     position: relative;
-//     &:before, &:after {
-//       content: '';
-//       position: absolute;
-//       background: ${({ theme }) => theme.materialText};
-//     }
-//     &:before {
-//       height: 100%;
-//       width: 3px;
-//       left: 50%;
-//       transform: translateX(-50%);
-//     }
-//     &:after {
-//       height: 3px;
-//       width: 100%;
-//       left: 0;
-//       top: 50%;
-//       transform: translateY(-50%);
-//     }
-//   }
-// `;
 
-// const Panel = styled.div`
-//  padding: 2rem;
-// `;
+import expandIcon from '/src/assets/images/Arrow (down).ico';
+import collapseIcon from '/src/assets/images/Arrow (up).ico';
+
+const bigBlue = `
+  color: white;
+  padding: 8px;
+  background-color: #174378;
+  border: 1px solid #174378;
+  border-radius: 3px;
+`;
+
+const smallGrey = `
+  margin: 5px 0;
+  padding: 5px 10px;
+  background-color: #dfe7ec;
+  border: 1px solid #c7d3df;
+  border-radius: 3px;
+  color: #545f69;
+  position: relative;
+
+  span {
+    color: #041320;
+  }
+`;
 
 const StyledTree = styled.ul`
   list-style: none;
-  padding-left: 20px;
-  
+  padding-left: 10px;
+
   .folder {
     cursor: pointer;
-    i { margin-right: 5px; }
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background-color: white;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.05);
+    height: 30%;
+    align-items: center;
+    justify-content: center;
+
+    &:not(:first-child) {
+      margin-top: 2rem;
+    }
+
+    ${bigBlue}
+
+    @media (min-width: 768px) {
+      padding: 2rem;
+    }
+
+    @media (min-width: 1024px) {
+      padding: 2rem;
+    }
   }
+
   .file {
     margin-left: 20px;
     list-style-type: none;
+    ${smallGrey}
   }
+
   .toggle-button {
     background: none;
     border: none;
@@ -62,13 +73,69 @@ const StyledTree = styled.ul`
     font-size: 1rem;
     padding: 0;
   }
+
   .hidden { display: none; }
+
   input[type="checkbox"] {
     display: none;
   }
+
   input[type="checkbox"] + i + ul { display: none; }
   input[type="checkbox"]:checked + i + ul { display: block; }
 `;
+
+// const StyledTree = styled.ul`
+//   list-style: none;
+//   padding-left: 10px;
+  
+//   .folder {
+//     cursor: pointer;
+//     display: flex;
+//     flex-direction: column;
+//     width: 100%;
+//     background-color: white;
+//     padding: 2rem;
+//     border-radius: 0.5rem;
+//     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.05);
+//     height: 30%;
+//     align-items: center;
+//     justify-content: center;
+
+//     &:not(:first-child) {
+//       margin-top: 2rem;
+//     }
+
+//     @media (min-width: 768px) {
+//       padding: 2rem;
+//     }
+
+//     @media (min-width: 1024px) {
+//       padding: 2rem;
+//     }
+//   }
+
+//   .file {
+//     margin-left: 20px;
+//     list-style-type: none;
+//   }
+
+//   .toggle-button {
+//     background: none;
+//     border: none;
+//     cursor: pointer;
+//     font-size: 1rem;
+//     padding: 0;
+//   }
+
+//   .hidden { display: none; }
+
+//   input[type="checkbox"] {
+//     display: none;
+//   }
+
+//   input[type="checkbox"] + i + ul { display: none; }
+//   input[type="checkbox"]:checked + i + ul { display: block; }
+// `;
 
 function buildCommentTree(comments) {
   const commentMap = {};
@@ -97,7 +164,7 @@ const Comment = ({ comment }) => {
       <li>
         <div className="folder">
           <button onClick={toggle} className="toggle-button">
-            {isOpen ? '-' : '+'}
+            <img src={isOpen ? collapseIcon : expandIcon} alt={isOpen ? 'Collapse' : 'Expand'} />
           </button>
           <span>{`Comment by ${comment.author}`}</span>
           <ul className={isOpen ? '' : 'hidden'}>
